@@ -1,0 +1,13 @@
+.days {
+  display: flex;
+  width: 1170px;
+  margin-top: 40px;
+  background: #fff;
+  box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2);
+  border-radius: 5px; }
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% / 5); }
