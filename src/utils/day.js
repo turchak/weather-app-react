@@ -29,6 +29,9 @@ export const convertDate = date => {
       case 6:
         result = 'Sat';
         break;
+      default:
+        result = 'N/A';
+        break;
     }
     return result;
   };
@@ -82,6 +85,9 @@ export const convertDate = date => {
 
       case 11:
         result = 'Dec';
+        break;
+      default:
+        result = 'N/A';
         break;
     }
     return result;

@@ -1,6 +1,7 @@
 import './Search.css';
 import { API } from '../../utils/api';
 import React, { Component } from 'react';
+import { Favorite } from '../Favorite/Favorite';
 
 export class Search extends Component {
   constructor(props) {
@@ -8,6 +9,9 @@ export class Search extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
+    this.state = {
+      city: null,
+    };
   }
 
   componentDidMount() {
@@ -23,7 +27,10 @@ export class Search extends Component {
   }
 
   handleFocus(ev) {
-    if (!ev.target.classList.contains('search__input') || ev.target.classList.contains('search__input--invalid')) {
+    if (
+      !ev.target.classList.contains('search__input') ||
+      ev.target.classList.contains('search__input--invalid')
+    ) {
       ev.target.classList.toggle('search__input--invalid');
     }
   }
@@ -33,7 +40,11 @@ export class Search extends Component {
     const city = document.querySelector('.search__input');
     const cityName = city.value.trim();
     if (cityName) {
-      API.getCoordinates(cityName).then(result => this.props.submit(result));
+      API.getCoordinates(cityName).then(result => {
+        this.props.submit(result);
+        this.setState({ city: cityName });
+        console.log(this.state);
+      });
     }
     if (!cityName) {
       console.log('invalid');
@@ -45,10 +56,18 @@ export class Search extends Component {
 
   render() {
     return (
-      <form className="search" onSubmit={this.handleSubmit}>
-        <input className="search__input" type="text" onChange={this.handleChange} onFocus={this.handleFocus} />
-        <input className="search__button" type="submit" value="Search" />
-      </form>
+      <div className="search">
+        <form className="search__form" onSubmit={this.handleSubmit}>
+          <input
+            className="search__input"
+            type="text"
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+          />
+          <input className="search__button" type="submit" value="Search" />
+        </form>
+        <Favorite currentCity={this.state.city} />
+      </div>
     );
   }
 }

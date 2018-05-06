@@ -4,10 +4,6 @@ import { convertIcon } from '../../utils/icon';
 import { convertDate } from '../../utils/day';
 
 export class Daily extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this.setIcon();
   }

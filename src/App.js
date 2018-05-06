@@ -34,7 +34,10 @@ class App extends Component {
       days: this.state.days,
     };
 
-    Promise.all([API.getCurrent(currentWeather), API.getWeek(dailyWeather)]).then(res => {
+    Promise.all([
+      API.getCurrent(currentWeather),
+      API.getWeek(dailyWeather),
+    ]).then(res => {
       const current = res[0].data[0];
       const week = res[1].data;
       this.setState({

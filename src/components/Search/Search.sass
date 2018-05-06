@@ -1,6 +1,8 @@
 @import ../../sass/variables.sass
 
 .search
+    display: flex
+
     &__input
         width: 240px
         height: 48px
@@ -15,9 +17,11 @@
 
         &:focus
             outline: none
+            background: #fff
 
         &--invalid
             border-color: #e24f54
+            background: #fff
 
     &__button
         width: 80px

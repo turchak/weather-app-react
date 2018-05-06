@@ -137,7 +137,7 @@ export const convertIcon = dataIcon => {
       icon = getIcon('wi-night-alt-cloudy-high');
       break;
     default:
-      icon = getIcon('wi-day-sunny');
+      icon = 'N/A';
       break;
   }
 
