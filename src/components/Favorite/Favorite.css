@@ -1,5 +1,6 @@
 .favorite {
-  margin-left: 10px; }
+  margin-left: 10px;
+  position: absolute; }
   .favorite__button {
     width: 48px;
     height: 48px;

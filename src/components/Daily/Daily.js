@@ -17,26 +17,25 @@ export class Daily extends Component {
   }
 
   render() {
-    console.log(this.props.data);
     return (
       <div className="daily">
         <ul className="days">
-          {this.props.data.map((el, index) => {
+          {this.props.data.map((elem, index) => {
             return (
               <li key={index} className="day">
-                <p className="day__time">{convertDate(el.ts)}</p>
+                <p className="day__time">{convertDate(elem.ts)}</p>
                 <p className="day__temp">
                   <span className="day__temp-value">
-                    {el.min_temp}
+                    {elem.min_temp}
                     <span className="day__temp-units">c</span>
                   </span>
                   <span className="day__temp-value">
-                    {el.max_temp}
+                    {elem.max_temp}
                     <span className="day__temp-units">c</span>
                   </span>
                 </p>
                 <i className="day__icon" />
-                <p className="day__description">{el.weather.description}</p>
+                <p className="day__description">{elem.weather.description}</p>
               </li>
             );
           })}

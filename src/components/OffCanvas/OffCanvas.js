@@ -1,5 +1,6 @@
 import './OffCanvas.css';
 import React, { Component } from 'react';
+import { API } from '../../utils/api';
 
 export class OffCanvas extends Component {
   constructor(props) {
@@ -35,6 +36,25 @@ export class OffCanvas extends Component {
       sidebar.classList.add('menu__sidebar--opened');
       background.classList.add('menu__background--opened');
     }
+
+    if (elemClass.contains('menu__sidebar-item')) {
+      const cityName = ev.target.innerText;
+      API.getCoordinates(cityName).then(result => {
+        const url = `?lat=${result.geometry.location.lat}&lng=${
+          result.geometry.location.lng
+        }`;
+        window.location.hash = url;
+        this.props.setCity(cityName);
+      });
+    }
+  }
+
+  setCoordinates(city) {
+    API.getCoordinates(city).then(result => {
+      return `?lat=${result.geometry.location.lat}&lng=${
+        result.geometry.location.lng
+      }`;
+    });
   }
 
   render() {
@@ -45,15 +65,25 @@ export class OffCanvas extends Component {
         </button>
         <div className="menu__sidebar">
           <ul className="menu__sidebar-items">
-            <li className="menu__sidebar-item">
-              <span className="menu__sidebar-item-link">{this.props.list}</span>
-            </li>
+            {this.props.list.map((elem, index) => {
+              return (
+                <li key={index} className="menu__sidebar-item">
+                  {elem}
+                </li>
+              );
+            })}
           </ul>
-          <button className="menu__button menu__button--clear" onClick={this.props.clear}>
+          <button
+            className="menu__button menu__button--clear"
+            onClick={this.props.clear}
+          >
             <i className="fa fa-trash" aria-hidden="true" />
           </button>
           <button className="menu__button menu__button--close">
-            <i className="fa fa-times-circle menu__button-icon" aria-hidden="true" />
+            <i
+              className="fa fa-times-circle menu__button-icon"
+              aria-hidden="true"
+            />
           </button>
         </div>
         <div className="menu__background" />

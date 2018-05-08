@@ -56,6 +56,11 @@
   z-index: 2; }
   .menu__sidebar--opened {
     transform: translateX(0); }
+  .menu__sidebar-item {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer; }
 
 .menu__background {
   position: absolute;

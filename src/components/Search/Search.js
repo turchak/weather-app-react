@@ -1,7 +1,7 @@
 import './Search.css';
-import { API } from '../../utils/api';
 import React, { Component } from 'react';
 import { Favorite } from '../Favorite/Favorite';
+import { API } from '../../utils/api';
 
 export class Search extends Component {
   constructor(props) {
@@ -14,7 +14,17 @@ export class Search extends Component {
     };
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.city != prevState.city) {
+      return {
+        city: nextProps.city,
+      };
+    }
+    return null;
+  }
+
   componentDidMount() {
+    document.querySelector('.search__form').value = this.state.value;
     this.initAutocomplete();
   }
 
@@ -41,18 +51,21 @@ export class Search extends Component {
     const cityName = city.value.trim();
     if (cityName) {
       API.getCoordinates(cityName).then(result => {
-        this.props.submit(result);
-        this.setState({ city: cityName });
-        console.log(this.state);
+        const url = `?lat=${result.geometry.location.lat}&lng=${
+          result.geometry.location.lng
+        }`;
+        this.props.setCity(result.formatted_address);
+        window.location.hash = url;
       });
     }
     if (!cityName) {
-      console.log('invalid');
       city.classList.add('search__input--invalid');
     }
   }
 
-  handleChange() {}
+  handleChange(ev) {
+    this.setState({ city: ev.target.value });
+  }
 
   render() {
     return (
@@ -63,10 +76,11 @@ export class Search extends Component {
             type="text"
             onChange={this.handleChange}
             onFocus={this.handleFocus}
+            value={this.state.city || ''}
           />
           <input className="search__button" type="submit" value="Search" />
         </form>
-        <Favorite currentCity={this.state.city} />
+        <Favorite currentCity={this.state.city} setCity={this.props.setCity} />
       </div>
     );
   }

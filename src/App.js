@@ -13,15 +13,36 @@ class App extends Component {
       days: 5,
       current: null,
       daily: null,
+      city: '',
     };
     this.weather = this.weather.bind(this);
+    this.handleUrlChange = this.handleUrlChange.bind(this);
+    this.setCity = this.setCity.bind(this);
   }
-  componentDidMount() {}
 
-  weather(coordinates) {
-    const lat = coordinates.geometry.location.lat;
-    const lng = coordinates.geometry.location.lng;
-    console.log(this.state);
+  componentDidMount() {
+    window.addEventListener('hashchange', () =>
+      this.handleUrlChange(this.path)
+    );
+  }
+
+  get path() {
+    return window.location.hash.slice(1);
+  }
+
+  handleUrlChange(url) {
+    this.weather(url);
+  }
+
+  setCity(name) {
+    this.setState({ city: name });
+  }
+
+  weather(url) {
+    const param = new URLSearchParams(url);
+    const lat = param.get('lat');
+    const lng = param.get('lng');
+
     const currentWeather = {
       units: this.state.units,
       lat: lat,
@@ -59,7 +80,7 @@ class App extends Component {
     if (!!this.state.current & !!this.state.daily) {
       return (
         <div className="app">
-          <Search submit={this.weather} />
+          <Search setCity={this.setCity} city={this.state.city} />
           <Current data={this.state.current} />
           <Daily data={this.state.daily} />
         </div>
@@ -68,7 +89,7 @@ class App extends Component {
 
     return (
       <div className="app">
-        <Search submit={this.weather} />
+        <Search setCity={this.setCity} city={this.state.city} />
       </div>
     );
   }

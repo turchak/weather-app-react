@@ -44,6 +44,7 @@ class Api {
         })
         .asPromise()
         .then(response => {
+          console.log(response.json);
           return response.json.results[0];
         });
       return resolve(results);

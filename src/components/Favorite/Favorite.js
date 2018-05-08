@@ -10,11 +10,8 @@ export class Favorite extends Component {
     this.state = {
       list: this.getList() || [],
       city: null,
+      valid: false,
     };
-  }
-
-  componentDidMount() {
-    console.log(this.state);
   }
 
   getList() {
@@ -25,13 +22,9 @@ export class Favorite extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
       city: nextProps.currentCity,
+      valid: prevState.city ? true : false,
     };
   }
-
-  // componentWillReceiveProps() {
-  //   console.log('will');
-  //   this.setState({ city: this.props.currentCity });
-  // }
 
   setList(city) {
     if (!city) {
@@ -54,18 +47,29 @@ export class Favorite extends Component {
   }
 
   handleClick() {
-    console.log(this.state);
     this.setList(this.state.city);
   }
 
   render() {
     return (
       <div>
-        <OffCanvas list={this.state.list} clear={this.handleClear} />
+        <OffCanvas
+          list={this.state.list}
+          clear={this.handleClear}
+          setCity={this.props.setCity}
+        />
+
         <div className="favorite">
-          <button className="favorite__button favorite__button--add" onClick={this.handleClick}>
-            <i className="fa fa-plus" aria-hidden="true" />
-          </button>
+          {this.state.valid ? (
+            <button
+              className="favorite__button favorite__button--add"
+              onClick={this.handleClick}
+            >
+              <i className="fa fa-plus" aria-hidden="true" />
+            </button>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     );
