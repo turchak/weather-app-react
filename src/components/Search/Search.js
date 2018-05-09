@@ -15,12 +15,9 @@ export class Search extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.city != prevState.city) {
-      return {
-        city: nextProps.city,
-      };
-    }
-    return null;
+    return {
+      city: nextProps.city,
+    };
   }
 
   componentDidMount() {
@@ -54,7 +51,7 @@ export class Search extends Component {
         const url = `?lat=${result.geometry.location.lat}&lng=${
           result.geometry.location.lng
         }`;
-        this.props.setCity(result.formatted_address);
+        this.props.setCity(cityName);
         window.location.hash = url;
       });
     }

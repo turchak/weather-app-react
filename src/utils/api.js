@@ -19,7 +19,16 @@ class Api {
   getCurrent(data) {
     const { units, lat, lng } = data;
     return new Promise(resolve => {
-      const url = this.weatherClient.url.current + '?lat=' + lat + '&lon=' + lng + '&key=' + this.weatherClient.key + '&units=' + units;
+      const url =
+        this.weatherClient.url.current +
+        '?lat=' +
+        lat +
+        '&lon=' +
+        lng +
+        '&key=' +
+        this.weatherClient.key +
+        '&units=' +
+        units;
       fetch(url).then(response => {
         return resolve(response.json());
       });
@@ -29,7 +38,18 @@ class Api {
   getWeek(data) {
     const { units, lat, lng, days } = data;
     return new Promise(resolve => {
-      const url = this.weatherClient.url.daily + '?lat=' + lat + '&lon=' + lng + '&key=' + this.weatherClient.key + '&units=' + units + '&days=' + days;
+      const url =
+        this.weatherClient.url.daily +
+        '?lat=' +
+        lat +
+        '&lon=' +
+        lng +
+        '&key=' +
+        this.weatherClient.key +
+        '&units=' +
+        units +
+        '&days=' +
+        days;
       fetch(url).then(response => {
         return resolve(response.json());
       });
@@ -44,7 +64,6 @@ class Api {
         })
         .asPromise()
         .then(response => {
-          console.log(response.json);
           return response.json.results[0];
         });
       return resolve(results);

@@ -7,6 +7,7 @@ export class Favorite extends Component {
     super(props);
     this.handleClear = this.handleClear.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.deleteCity = this.deleteCity.bind(this);
     this.state = {
       list: this.getList() || [],
       city: null,
@@ -41,6 +42,20 @@ export class Favorite extends Component {
     }
   }
 
+  deleteCity(city) {
+    const list = this.getList();
+    if (list.includes(city)) {
+      let i = list.indexOf(city);
+      if (i !== -1) {
+        list.splice(i, 1);
+      }
+      this.handleClear();
+      const listString = JSON.stringify(list);
+      window.localStorage.setItem('favorites', listString);
+      this.setState({ list });
+    }
+  }
+
   handleClear() {
     window.localStorage.removeItem('favorites');
     this.setState({ list: [] });
@@ -57,6 +72,7 @@ export class Favorite extends Component {
           list={this.state.list}
           clear={this.handleClear}
           setCity={this.props.setCity}
+          deleteCity={this.deleteCity}
         />
 
         <div className="favorite">

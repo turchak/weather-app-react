@@ -9,6 +9,46 @@
         background: #e3e8eb
         cursor: pointer
 
+        &--delete
+            border-radius: 9999px
+            width: 20px
+            right: 0
+            left: unset
+            top: 50%
+            transform: translateY(-50%)
+
+            &:focus
+                outline: none
+
+                // box-shadow: 0 0 0 2px #8c72bb
+
+            &::before
+                content: ""
+                position: absolute
+                top: 0
+                right: 50%
+                display: block
+                height: 100%
+                width: 1px
+                background: #8c72bb
+                transform: rotateZ(45deg) translateX(50%)
+
+            &::after
+                content: ""
+                position: absolute
+                top: 0
+                right: 50%
+                display: block
+                height: 100%
+                width: 1px
+                background: #8c72bb
+                transform: rotateZ(-45deg) translateX(50%)
+
+            &:hover::before, &:hover::after
+                box-shadow: 0 0 0 1px #db4437
+
+                // background: #db4437
+
         &-icon
             font-size: 20px
             color: #8c72bb
@@ -65,10 +105,17 @@
             transform: translateX(0)
 
         &-item
-            text-overflow: ellipsis
-            overflow: hidden
-            white-space: nowrap
-            cursor: pointer
+            position: relative
+            display: flex
+            justify-content: space-between
+            padding-right: 20px
+            margin-bottom: 10px
+
+            &-name
+                text-overflow: ellipsis
+                overflow: hidden
+                white-space: nowrap
+                cursor: pointer
 
     &__background
         position: absolute

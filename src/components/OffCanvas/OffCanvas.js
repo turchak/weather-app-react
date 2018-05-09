@@ -47,6 +47,11 @@ export class OffCanvas extends Component {
         this.props.setCity(cityName);
       });
     }
+
+    if (elemClass.contains('menu__button--delete')) {
+      const cityName = ev.target.dataset.delete;
+      this.props.deleteCity(cityName);
+    }
   }
 
   setCoordinates(city) {
@@ -68,7 +73,11 @@ export class OffCanvas extends Component {
             {this.props.list.map((elem, index) => {
               return (
                 <li key={index} className="menu__sidebar-item">
-                  {elem}
+                  <span className="menu__sidebar-item-name">{elem}</span>
+                  <button
+                    className="menu__button menu__button--delete"
+                    data-delete={elem}
+                  />
                 </li>
               );
             })}
