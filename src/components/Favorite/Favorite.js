@@ -50,6 +50,9 @@ export class Favorite extends Component {
         list.splice(i, 1);
       }
       this.handleClear();
+      if (list.length === 0) {
+        return;
+      }
       const listString = JSON.stringify(list);
       window.localStorage.setItem('favorites', listString);
       this.setState({ list });
