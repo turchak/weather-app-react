@@ -24,6 +24,10 @@ class App extends Component {
     window.addEventListener('hashchange', () =>
       this.handleUrlChange(this.path)
     );
+
+    if (this.path.length === 0) {
+      return;
+    }
     this.weather(this.path);
   }
 
