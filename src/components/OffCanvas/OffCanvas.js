@@ -6,10 +6,21 @@ export class OffCanvas extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      count: null,
+    };
   }
 
   componentDidMount() {
     this.handleOpen();
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const countList = nextProps.list;
+    const amount = Array.from(countList).length;
+    return {
+      count: amount,
+    };
   }
 
   handleOpen() {
@@ -63,10 +74,21 @@ export class OffCanvas extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="menu">
         <button className="menu__button menu__button--open">
-          <i className="fa fa-star menu__button-icon" aria-hidden="true" />
+          {this.state.count >= 1 ? (
+            [...Array(this.state.count)].map((e, i) => (
+              <i
+                key={i}
+                className="fa fa-star menu__button-icon menu__button-icon--gold"
+                aria-hidden="true"
+              />
+            ))
+          ) : (
+            <i className="fa fa-star menu__button-icon" aria-hidden="true" />
+          )}
         </button>
         <div className="menu__sidebar">
           <ul className="menu__sidebar-items">
