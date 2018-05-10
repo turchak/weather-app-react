@@ -42,7 +42,7 @@ export class Current extends Component {
           <span className="current__summary-item current__summary-item--temp">
             {this.props.data.temp}
             <span className="current__summary-item-units current__summary-item-units--temp">
-              c
+              <i className="current__summary-item current__summary-item--icon icon wi wi-celsius" />
             </span>
           </span>
           <span className="current__summary-item current__summary-item--description">

@@ -74,7 +74,6 @@ export class OffCanvas extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <div className="menu">
         <button className="menu__button menu__button--open">

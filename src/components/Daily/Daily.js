@@ -10,9 +10,10 @@ export class Daily extends Component {
 
   setIcon() {
     const icons = document.querySelectorAll('.day__icon');
-    const currentIcon = convertIcon(this.props.data.icon);
-    icons.forEach(icon => {
-      icon.className = `day__icon ${currentIcon}`;
+    icons.forEach((icon, index) => {
+      icon.className = `day__icon ${convertIcon(
+        this.props.data[index].weather.icon
+      )}`;
     });
   }
 
@@ -27,11 +28,16 @@ export class Daily extends Component {
                 <p className="day__temp">
                   <span className="day__temp-value">
                     {elem.min_temp}
-                    <span className="day__temp-units">c</span>
+                    <span className="day__temp-units">
+                      <i className="day__temp-units-icon icon wi wi-celsius" />
+                    </span>
                   </span>
+                  <span className="day__temp-between">-</span>
                   <span className="day__temp-value">
                     {elem.max_temp}
-                    <span className="day__temp-units">c</span>
+                    <span className="day__temp-units">
+                      <i className="day__temp-units-icon icon wi wi-celsius" />
+                    </span>
                   </span>
                 </p>
                 <i className="day__icon" />
