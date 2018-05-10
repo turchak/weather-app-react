@@ -37,7 +37,7 @@ export class OffCanvas extends Component {
       background.classList.add('menu__background--opened');
     }
 
-    if (elemClass.contains('menu__sidebar-item')) {
+    if (elemClass.contains('menu__sidebar-item-name')) {
       const cityName = ev.target.innerText;
       API.getCoordinates(cityName).then(result => {
         const url = `?lat=${result.geometry.location.lat}&lng=${

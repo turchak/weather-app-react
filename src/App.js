@@ -13,7 +13,7 @@ class App extends Component {
       days: 5,
       current: null,
       daily: null,
-      city: '',
+      city: null,
     };
     this.weather = this.weather.bind(this);
     this.handleUrlChange = this.handleUrlChange.bind(this);
@@ -25,10 +25,10 @@ class App extends Component {
       this.handleUrlChange(this.path)
     );
 
-    if (this.path.length === 0) {
-      return;
-    }
-    this.weather(this.path);
+    // if (this.path.length === 0) {
+    //   return;
+    // }
+    // this.weather(this.path);
   }
 
   get path() {
@@ -78,6 +78,10 @@ class App extends Component {
         },
         daily: week,
       });
+
+      if (!this.state.city) {
+        this.setState({ city: current.city_name });
+      }
     });
   }
 
