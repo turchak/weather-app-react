@@ -1,0 +1,48 @@
+//
+// MEDIA QUERIES MIXIN
+// --------------------------------------------------
+
+// Break Point (Desktop First)
+$desktop-l-width: 1440px
+$tablet-l-width: 1024px
+$tablet-s-width: 768px
+$mob-l-width: 640px
+$mob-m-width: 425px
+$mob-s-width: 375px
+
+// only PC
+=pc-only
+    @media screen and (min-width: unquote("#{$tablet-l-width} + 1"))
+        @content
+
+// PC large
+=pc-large
+    @media screen and (min-width: unquote("#{$desktop-l-width} + 1"))
+        @content
+
+// --------------------------------------------------
+
+// tablet
+=tab
+    @media screen and (max-width: #{$tablet-l-width})
+        @content
+
+// mobile
+=mob
+    @media screen and (max-width: unquote("#{$tablet-s-width} - 1"))
+        @content
+
+// mobile large
+=mob-large
+    @media screen and (max-width: #{$mob-l-width})
+        @content
+
+// mobile mid
+=mob-mid
+    @media screen and (max-width: #{$mob-m-width})
+        @content
+
+// mobile small
+=mob-small
+    @media screen and (max-width: #{$mob-s-width})
+        @content

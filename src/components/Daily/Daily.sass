@@ -1,17 +1,28 @@
+@import ../../sass/helpers/media-queries.sass
+
+.daily
+    +tab
+        align-self: stretch
+
 .days
     display: flex
-    width: 1170px
+    flex-wrap: wrap
+    justify-content: space-around
     margin-top: 40px
     background: #e3e8eb
     border-radius: 5px
+
+    +tab
+        width: 100%
 
 .day
     display: flex
     flex-direction: column
     align-items: center
     width: calc(100% / 5 - 40px)
+    min-width: 175px
     margin: 50px 20px 20px
-    padding: 30px 0
+    padding: 30px
     background: #ce9eda
     background: #fff
     box-shadow: 5px 5px 25px 0px rgba(46, 61, 73, 0.2)
@@ -19,6 +30,15 @@
     cursor: pointer
     transition: transform 0.4s ease-in-out
     will-change: transform
+    overflow-x: hidden
+
+    +mob-large
+        min-width: 220px
+
+
+    +mob-mid
+        min-width: 80%
+
 
     &:hover
         transform: translateY(-40px)
@@ -44,3 +64,16 @@
                 margin-left: 5px
                 font-size: 20px
                 line-height: 17px
+
+    &__description
+        position: relative
+        white-space: nowrap
+
+        // align-self: flex-start
+
+        &::before
+            content: ""
+            position: absolute
+            right: 0
+            top: 0
+            width: 30%

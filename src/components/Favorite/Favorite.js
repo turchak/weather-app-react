@@ -21,10 +21,13 @@ export class Favorite extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    return {
-      city: nextProps.currentCity,
-      valid: prevState.city ? true : false,
-    };
+    if (nextProps.currentCity) {
+      return {
+        city: nextProps.currentCity,
+        valid: true,
+      };
+    }
+    return null;
   }
 
   setList(city) {
