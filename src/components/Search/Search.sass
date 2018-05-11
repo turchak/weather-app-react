@@ -5,6 +5,7 @@
     display: flex
 
     &__input
+        all: unset
         width: 240px
         height: 48px
         padding: 6px 10px
@@ -15,6 +16,7 @@
         background: #e3e8eb
         font-family: inherit
         transition: border-color 0.4s ease
+        box-sizing: border-box
 
         +mob-mid
             width: 170px
@@ -29,6 +31,7 @@
             background: #fff
 
     &__button
+        all: unset
         width: 80px
         height: 48px
         border: none
@@ -38,6 +41,7 @@
         font-family: inherit
         font-weight: 500
         color: #fff
+        text-align: center
         cursor: pointer
         transition: background 0.4s ease
 
