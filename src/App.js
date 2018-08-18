@@ -15,7 +15,7 @@ class App extends Component {
       daily: null,
       city: null,
     };
-    this.weather = this.weather.bind(this);
+    this.weather = this.getWeather.bind(this);
     this.handleUrlChange = this.handleUrlChange.bind(this);
     this.setCity = this.setCity.bind(this);
   }
@@ -28,7 +28,7 @@ class App extends Component {
     if (this.path.length === 0) {
       return;
     }
-    this.weather(this.path);
+    this.getWeather(this.path);
   }
 
   get path() {
@@ -36,14 +36,14 @@ class App extends Component {
   }
 
   handleUrlChange(url) {
-    this.weather(url);
+    this.getWeather(url);
   }
 
   setCity(name) {
     this.setState({ city: name });
   }
 
-  weather(url) {
+  getWeather(url) {
     const param = new URLSearchParams(url);
     const lat = param.get('lat');
     const lng = param.get('lng');
@@ -86,7 +86,7 @@ class App extends Component {
   }
 
   render() {
-    if (!!this.state.current & !!this.state.daily) {
+    if (!!this.state.current && !!this.state.daily) {
       return (
         <div className="app">
           <Search setCity={this.setCity} city={this.state.city} />
