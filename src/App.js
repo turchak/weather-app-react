@@ -15,7 +15,7 @@ class App extends Component {
       daily: null,
       city: null,
     };
-    this.weather = this.getWeather.bind(this);
+    this.getWeather = this.getWeather.bind(this);
     this.handleUrlChange = this.handleUrlChange.bind(this);
     this.setCity = this.setCity.bind(this);
   }

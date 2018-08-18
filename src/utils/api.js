@@ -20,8 +20,8 @@ class Api {
     const { units, lat, lng } = data;
     const { key, url } = this.weatherClient;
     return new Promise(resolve => {
-      const url = `${url.current}?lat=${lat}&lon=${lng}&key=${key}&units=${units}`;
-      fetch(url).then(response => {
+      const query = `${url.current}?lat=${lat}&lon=${lng}&key=${key}&units=${units}`;
+      fetch(query).then(response => {
         return resolve(response.json());
       });
     });
@@ -31,8 +31,8 @@ class Api {
     const { units, lat, lng, days } = data;
     const { url, key } = this. weatherClient;
     return new Promise(resolve => {
-      const url =`${url.daily}?lat=${lat}&lon=${lng}&key=${key}&units=${units}&days=${dayss}`;
-      fetch(url).then(response => {
+      const query =`${url.daily}?lat=${lat}&lon=${lng}&key=${key}&units=${units}&days=${days}`;
+      fetch(query).then(response => {
         return resolve(response.json());
       });
     });
