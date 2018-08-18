@@ -20,6 +20,10 @@ class App extends Component {
     this.setCity = this.setCity.bind(this);
   }
 
+  get path() {
+    return window.location.hash.slice(1);
+  }
+
   componentDidMount() {
     window.addEventListener('hashchange', () =>
       this.handleUrlChange(this.path)
@@ -28,11 +32,8 @@ class App extends Component {
     if (this.path.length === 0) {
       return;
     }
-    this.getWeather(this.path);
-  }
 
-  get path() {
-    return window.location.hash.slice(1);
+    this.getWeather(this.path);
   }
 
   handleUrlChange(url) {
@@ -44,26 +45,28 @@ class App extends Component {
   }
 
   getWeather(url) {
+    const { units, days } = this.state;
     const param = new URLSearchParams(url);
     const lat = param.get('lat');
     const lng = param.get('lng');
 
     const currentWeather = {
-      units: this.state.units,
       lat: lat,
       lng: lng,
+      units,
     };
     const dailyWeather = {
-      units: this.state.units,
       lat: lat,
       lng: lng,
-      days: this.state.days,
+      days,
+      units,
     };
 
     Promise.all([
       API.getCurrent(currentWeather),
       API.getWeek(dailyWeather),
     ]).then(res => {
+      console.log(res);
       const current = res[0].data[0];
       const week = res[1].data;
       this.setState({
@@ -86,19 +89,22 @@ class App extends Component {
   }
 
   render() {
-    if (!!this.state.current && !!this.state.daily) {
-      return (
-        <div className="app">
-          <Search setCity={this.setCity} city={this.state.city} />
-          <Current data={this.state.current} />
-          <Daily data={this.state.daily} />
-        </div>
-      );
-    }
+    const { current, daily, city } = this.state;
+    // if (!!current && !!daily) {
+    //   return (
+    //     <div className="app">
+    //       <Search setCity={this.setCity} city={city} />
+    //       <Current data={current} />
+    //       <Daily data={daily} />
+    //     </div>
+    //   );
+    // }
 
     return (
       <div className="app">
-        <Search setCity={this.setCity} city={this.state.city} />
+        <Search setCity={this.setCity} city={city} />
+        {current ? <Current data={current} /> : null}
+        {daily ? <Daily data={daily} />: null}
       </div>
     );
   }
